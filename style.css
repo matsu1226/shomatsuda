@@ -535,9 +535,9 @@ i{
     background-color: #575757;
     color: white;
 }
+
 @media(max-width:430px){
     .contact-wrapper{
         width: 92vw;
     }
-
 }      
