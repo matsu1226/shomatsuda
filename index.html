@@ -5,19 +5,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHO MATSUDA | Web designer</title>
+    <title>SHO MATSUDA | Front-end engineer</title>
     <link rel="stylesheet" href="./style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="./slick/slick-theme.css">
 </head>
 
 <body>
     <header>
         <div class="header-wrapper">
-
             <div class="header-left">
                 <a class="header-logo" href="#">SHO MATSUDA</a>
             </div>
-            <nav class="header-right">
+            <nav class="header-right" id="header-right">
                 <ul class="nav-list">
                     <li class="nav-item"><a class="underdot" href="./about/index.html">About</a></li>
                     <li class="nav-item"><a class="underdot" href="">Works</a></li>
@@ -25,8 +25,8 @@
                     <li class="nav-item"><a class="underdot" href="./contact/index.html">Contact</a></li>
                 </ul>
             </nav>
-            <div class="hbg-icon">
-                <span class="hbg-bar"></span>
+            <div class="hbg-icon" id="hbg-icon">
+                <span class="hbg-bar" id="hbg-bar"></span>
             </div>
         </div>
     </header>
@@ -34,12 +34,16 @@
     <main>
         <section class="fv">
             <div class="fv-img-container">
-                <img class="fv-img fv-img01"
-                    src="./img/fv02.jpg" alt="美瑛の雪景色">
+                <picture >
+                    <source media="(max-width:780px)" srcset="./img/fvimg_snow_tab.jpg">
+                    <source media="(max-width:430px)" srcset="./img/fvimg_snow_sp.jpg">
+                    <img id="fvImg" class="fv-img fv-img01" src="./img/fvimg_snow_pc.jpg" alt="美瑛の雪景色">
+                    <!-- <div class="fv-img-cover"></div> -->
+                </picture>
             </div>
             <div class="mein-copy">
-                <h1>SHO <br class="br-sp">MATSUDA</h1>
-                <p>Web designer</p>
+                <h1 id="mainCopy">SHO <br class="br-sp">MATSUDA</h1>
+                <p>Front-end engineer</p>
             </div>
         </section>
         <section class="contents">
@@ -55,70 +59,115 @@
 
                 <div class="works sub-section">
                     <h2 class="section-title">Works</h2>
-
                     <div class="work-items">
 
-                        <div class="work-item">
-                            <a class="modal-btn" href="#">
-                                <img class="work-img" src="img/digsmile.png" alt="Matsuda design">
-                                <div class="modal">
-                                    <div class="modal-content">
-                                        <div class="modal-imgs">
-                                            <img class="modal-img" src="./img/digsmile.png" alt="">
+                        <div class="work-item work-item1">
+                            <div class="modal-opener" data-modal-opener="modal1">
+                                <img class="work-img" src="img/workimg_digsmile_pc.png" alt="Matsuda design">
+                                <p class="work-text">[DIGSMILE.inc ※模擬サイト]</p>
+                            </div>
+                            <div class="modal-wrapper" data-modal-wrapper="modal1">
+                                <div class="modal-window">
+                                    <div class="modal-imgs slider1">
+                                        <div>
+                                            <img class="modal-img" src="./img/modalimg_digsmile_pc.png" alt="">
                                         </div>
-                                        <p class="modal-text">
-                                            コーポレートサイト  株式会社DIGSMILE
-                                            <br>http://matsu1226.github.io/DIGSMILE/
-                                            <br>
-                                            <br>
-                                            <br>ＷＥＢ制作会社のコーポレートサイトを想定して、作成させていただきました。
-                                            <br>デザインカンプを参考に０からコーディングしています。
-                                            <br>
-                                            <br>〈point〉
-                                            <br>・jQueryを用いたアニメーション
-                                            <br>・複数の画像/背景画像の重ね合わせとレスポンシブ対応
-                                            <br>・googlemap埋め込み
-                                            <br>・画像のretina対応
-                                            <br>・ハンバーガーメニュー
-                                            <br>・操作性の高いコンタクトフォーム
-                                            <br>・プライバシーポリシーとブラウザ内ウィンドウのデザイン
-                                            <br>
-                                            <br>〈デザインカンプ引用元〉
-                                            <br>https://crestadesign.org/cording-training/
-                                            <br>※提供いただきありがとうございます。
-                                        </p> 
-                                        <div class="modal-close-icon modal-close"></div>
+                                        <div>
+                                            <img class="modal-img" src="./img/modalimg_digsmile2_pc.png" alt="">
+                                        </div>
                                     </div>
-                                    <div class="modal-bg modal-close"></div>
+                                    <p class="modal-text">
+                                        コーポレートサイト 株式会社DIGSMILE
+                                        <br><a
+                                            href="http://matsu1226.github.io/DIGSMILE">http://matsu1226.github.io/DIGSMILE</a>
+                                        <br>
+                                        <br>
+                                        <br>ＷＥＢ制作会社のコーポレートサイトを想定して、作成させていただきました。
+                                        <br>デザインカンプを参考に０からコーディングしています。
+                                        <br>
+                                        <br>〈point〉
+                                        <br>・jQueryを用いたアニメーション
+                                        <br>・複数の画像/背景画像の重ね合わせとレスポンシブ対応
+                                        <br>・googlemap埋め込み
+                                        <br>・画像のretina対応
+                                        <br>・ハンバーガーメニュー
+                                        <br>・操作性の高いコンタクトフォーム
+                                        <br>・プライバシーポリシーとブラウザ内ウィンドウのデザイン
+                                        <br>
+                                        <br>〈デザインカンプ引用元〉
+                                        <br>https://crestadesign.org/cording-training/
+                                        <br>※提供いただきありがとうございます。
+                                    </p>
+                                    <div class="modal-closer modal-close-icon" data-modal-closer="modal1"></div>
                                 </div>
-                            </a>
-                            <p class="work-text">[DIGSMILE.inc]</p>
+                                <div class="modal-bg"></div>
+                            </div>
                         </div>
 
-                        <div class="work-item">
-                            <a class="modal-btn" href="#">
-                                <img class="work-img" src="img/digsmile.png" alt="Matsuda design">
-                                <div class="modal">
-                                    <div class="modal-content">
-                                        <div class="modal-close-icon modal-close"></div>
+                        <div class="work-item work-item2">
+                            <div class="modal-opener" data-modal-opener="modal2">
+                                <img class="work-img" src="img/workimg_matsudaseisakusyo_pc.png" alt="Matsuda design">
+                                <p class="work-text">[(株)立川松田製作所 ※模擬サイト]</p>
+                            </div>
+                            <div class="modal-wrapper" data-modal-wrapper="modal2">
+                                <div class="modal-window">
+                                    <div class="modal-imgs slider2">
+                                        <div>
+                                            <img class="modal-img" src="./img/modalimg_matsudaseisakusyo_pc.png" alt="">
+                                        </div>
+                                        <div>
+                                            <img class="modal-img" src="./img/modalimg_matsudaseisakusyo2_pc.png" alt="">
+                                        </div>
                                     </div>
-                                    <div class="modal-bg modal-close"></div>
+                                    <p class="modal-text">
+                                        コーポレートサイト 株式会社立川松田製作所
+                                        <!-- <br><a
+                                            href="http://matsu1226.github.io/DIGSMILE">http://matsu1226.github.io/DIGSMILE</a> -->
+                                        <br>
+                                        <br>※制作中
+
+
+                                    </p>
+                                    <div class="modal-closer modal-close-icon" data-modal-closer="modal2"></div>
                                 </div>
-                            </a>
-                            <p class="work-text">[blank]</p>
+                                <div class="modal-bg"></div>
+                            </div>
                         </div>
 
-                        <div class="work-item">
-                            <a class="modal-btn" href="#">
-                                <img class="work-img" src="img/digsmile.png" alt="Matsuda design">
-                                <div class="modal">
-                                    <div class="modal-content">
-                                        <div class="modal-close-icon modal-close"></div>
+                        <div class="work-item work-item3">
+                            <div class="modal-opener" data-modal-opener="modal3">
+                                <img class="work-img" src="img/workimg_NumberGame_pc.png" alt="Matsuda design">
+                                <p class="work-text">[Number Game]</p>
+                            </div>
+                            <div class="modal-wrapper" data-modal-wrapper="modal3">
+                                <div class="modal-window">
+                                    <div class="modal-imgs slider3">
+                                        <div>
+                                            <img class="modal-img" src="./img/modalimg_NumberGame_pc.png" alt="">
+                                        </div>
+                                        <div>
+                                            <img class="modal-img" src="./img/modalimg_NumberGame2_pc.png" alt="">
+                                        </div>
                                     </div>
-                                    <div class="modal-bg modal-close"></div>
+                                    <p class="modal-text">
+                                        Number Game
+                                        <br><a
+                                            href="http://matsu1226.github.io/NumberGame/">http://matsu1226.github.io/NumberGame/</a>
+                                        <br>
+                                        <br>
+                                        <br>JavaScriptの学習のアウトプットとして作成しました。
+                                        <br>
+                                        <br>〈point〉
+                                        <br>・クラスを適切に運用することにより、少ないコードでlevelの選択機能を搭載
+                                        <br>・適切にclickイベントを配置し、各種ボタン操作を制御
+                                        <br>・タイマー記録機能の追加
+                                        <br>
+
+                                    </p>
+                                    <div class="modal-closer modal-close-icon" data-modal-closer="modal3"></div>
                                 </div>
-                            </a>
-                            <p class="work-text">[blank]</p>
+                                <div class="modal-bg"></div>
+                            </div>
                         </div>
                     </div>
                     <a href="" class="more-btn" style="display: none;">→ more</a>
@@ -143,6 +192,20 @@
         <p>(c) 2021 SHOMATSUDA</p>
     </footer>
     <script src="script.js"></script>
+
+    <!-- slick.jsの設定 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./slick/slick.min.js"></script>
+
+    <script>
+        if($(window).width()<430){
+            $('.slider1').slick();
+            $('.slider2').slick();
+            $('.slider3').slick();
+
+        }
+    </script>
+
 </body>
 
 </html>

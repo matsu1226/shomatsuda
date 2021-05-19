@@ -43,7 +43,10 @@ ul{
     display: none;
 }
 .sub-section{
-    margin-top: 180px;
+    padding-top: 180px;
+}
+.contents{
+    background-color: rgba(255, 255, 255, 0.9);
 }
 .contents-wrapper{
     max-width: 900px;
@@ -59,7 +62,17 @@ ul{
     display: block;
     margin-top: 20px;
     text-align: right;
+    animation: btn-flash 1s linear infinite;
 }
+@keyframes btn-flash{
+    0%,100%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0.1;
+    }
+}
+
 
 @media(max-width:780px){
     .br-sp {
@@ -88,7 +101,7 @@ ul{
         font-size: 1.2rem;
     }
     .sub-section {
-        margin-top: 100px;
+        padding-top: 100px;
     }
 }
 
@@ -120,20 +133,9 @@ header:hover{
     font-family: Friz Quadrata;
     font-weight: bold;
 }
-.header-right{
-    z-index: 1;
-}
-.nav-list{
-    display: flex;
-    margin-top: 36px;
-}
-.nav-item{
-    margin-right: 30px;
-    font-size: 1.4rem;
-}
-.nav-item:last-of-type{
-    margin-right: 0px;
-}
+
+
+
 
 
 .underdot{
@@ -147,9 +149,9 @@ header:hover{
     right: 0;
     margin: auto;
     content: '';
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
+    width: 100%;
+    height: 2px;
+    /* border-radius: 50%; */
     background: #333;
     transform: scale(0,1);
     transform-origin: center bottom;
@@ -161,23 +163,50 @@ header:hover{
 }
 
 
+.header-right{
+    z-index: 1;
+}
+
+
+.nav-list{
+    display: flex;
+    margin-top: 36px;
+}
+.nav-item{
+    margin-right: 30px;
+    font-size: 1.4rem;
+}
+.nav-item:last-of-type{
+    margin-right: 0px;
+}
 .hbg-icon{
     display: none;
-    position: relative;
 }
+
+
 
 @media(max-width:430px){
     .header-right{
-        display: none;
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         width: 100vw;
         height: 100vh;
-        background-color:rgba(255, 255, 255, 0.95);
+        background-color:rgba(255, 255, 255, 0.8);
         z-index: 1;
         margin: 0;
-        
+
+        transform-origin: 92vw 4vh ;
+        transform: rotate(180deg);
+        transition: all 0.3s;
+    }
+    /* header-rightに付与するクラス */
+    .header-right.displayBlock{
+        /* display: block; */
+        transform: rotate(0);
+    }
+    .header-right.opacityOne{
+        opacity: 1;
     }
     .nav-list{
         padding: 100px;
@@ -201,14 +230,17 @@ header:hover{
     .hbg-icon{
         z-index: 1;
         display: block;
+        position: fixed;
     }
     .hbg-bar{
         background-color: black;
         height: 2px;
         width: 22px;
         position: absolute;
-        top: 45px;
-        right: 12px;
+        top:4vh;
+        left: 85vw;
+        transition: all 0.3s;
+
     }
     .hbg-bar::before{
         content: "";
@@ -217,6 +249,7 @@ header:hover{
         width: 22px;
         position:absolute;
         bottom: 8px;
+        transition: all 0.3s;
     }
     .hbg-bar::after{
         content: "";
@@ -225,20 +258,18 @@ header:hover{
         width: 22px;
         position:absolute;
         top: 8px;
+        transition: all 0.3s;
     }
 
     .hbg-bar.close{
         /* opacity: 0; */
         background: transparent;
-        transition: all 0.3s;
     }
     .hbg-bar.close::before{
         transform: translate(0px,8px) rotate(30deg);
-        transition: all 0.3s;
     }
     .hbg-bar.close::after{
         transform: translate(0px,-8px) rotate(-30deg);
-        transition: all 0.3s;
     }
 }
 
@@ -258,13 +289,20 @@ header:hover{
     height: 100vh;
 }
 .fv-img{
-    /* position: absolute; */
+    position: fixed;
+    z-index: -1;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
     object-fit: cover;
 }
+
+#fvImg{
+    filter: grayscale(100%) blur(5px);
+    transition: all 2s;
+}
+
 
 /* about */
 
@@ -288,26 +326,38 @@ header:hover{
 .work-img{
     width: 200px;
     height: 150px;
+    transition: opacity 0.3s;
+}
+.modal-opener:hover{
+    cursor: pointer;
+}
+.modal-opener:hover .work-img{
+    opacity: 0.7;
 }
 .work-text{
     text-align: right;
     font-size: 1.2rem; 
 }
 
-.modal{
-    display: none;
+
+
+/* modal */
+.modal-wrapper{
     position: fixed;
-    z-index: 2;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
+    
+    z-index: -1;
+    transition: opacity 0.3s;
+    opacity: 0;
 }
-.modal-content{
+.modal-window{
     background-color: rgba(255, 255, 255, 0.95);
-    border: 2px solid rgb(204, 204, 204);
-    width: 90vw;
-    height: 90vh;
+    border: 1px solid rgb(204, 204, 204);
+    width: 95vw;
+    height: 95vh;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -317,15 +367,30 @@ header:hover{
     z-index: 3;
     display: flex;
     justify-content: space-around;
-    padding: 10vh 10vw;
+    padding: 7vh 7vw;
+
+    transition:0.3s 0.1s;
+    transform: scale(0.3);
 }
+
+/* is_openでモーダル開くアニメーション・JS */
+.modal-wrapper.is-open{
+    opacity: 1;
+    z-index: 10;
+    transform: scale(1);
+}
+.modal-wrapper.is-open .modal-window{
+    transform: scale(1);
+}
+
+
 .modal-bg{
     position: absolute;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-close-icon{
@@ -369,20 +434,31 @@ header:hover{
 }
 .modal-text{
     display: block;
-    margin-left: 50px;
-    overflow: scroll;
+    /* margin-left: 20px; */
+    overflow-y: scroll;
+    padding: 0 20px;
+}
+.modal-text a{
+    text-decoration: underline;
 }
 
+
+
+
 @media(max-width:430px){
-    .modal-content{
-        flex-direction: column;
-        padding: 3vh 3vw;
+    .modal-window{
+        display: block;
+        padding: 5vh 5vw;
     }
     .modal-img{
         width: 200px;
         height: 150px;
     }
+    .modal-imgs{
+        height: 30%;
+    }
     .modal-text{
+        height: 70%;
         margin: 0;
     }
 }
@@ -394,8 +470,9 @@ header:hover{
 /* skill-blog-contact */
 .skill-blog-contact{
     display: flex;
-    justify-content: space-between;
-    padding-bottom: 150px;
+    justify-content: center;
+    padding-bottom: 20px;
+    margin-bottom: 130px;
 }
 .sub-sub-section{
     width: 200px;
@@ -403,6 +480,10 @@ header:hover{
 }
 
 /* footer */
+footer{
+    background-color: rgba(255, 255, 255, 0.9);
+
+}
 footer p{
     text-align: center;
     margin: 0 auto;
@@ -540,4 +621,5 @@ i{
     .contact-wrapper{
         width: 92vw;
     }
+
 }      
